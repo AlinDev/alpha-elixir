@@ -55,10 +55,11 @@ defmodule Devnet.EsdtTest do
     # }
   end
 
+  @tag :skip
   test "get tokens" do
     devnet = Network.get(:devnet)
     address = "erd1c579aq6kjkhar6cyx8qm9k9wettxjcf3jncduwe0pllqx0rlczfskg3vk2"
-    tokens = AccountState.get_tokens(address, devnet)
+    {:ok, tokens} = AccountState.get_tokens(address, devnet)
     # IO.inspect(tokens)
 
     json = Jason.encode!(tokens, pretty: true)
@@ -86,5 +87,16 @@ defmodule Devnet.EsdtTest do
     #    "name": "Name for WEB-5d08be"
     #  }
     # ]
+  end
+
+  # @tag :skip
+  test "get current version" do
+    devnet = Network.get(:devnet)
+    address = "erd1c579aq6kjkhar6cyx8qm9k9wettxjcf3jncduwe0pllqx0rlczfskg3vk2"
+    {:ok, version} = AccountState.get_current(address, devnet)
+    # IO.inspect(version)
+
+    json = Jason.encode!(version, pretty: true)
+    IO.puts(json)
   end
 end

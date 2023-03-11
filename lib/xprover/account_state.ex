@@ -5,23 +5,42 @@ defmodule Xprover.AccountState do
   defstruct nonce: 0,
             version: 0,
             balance: 0,
-            tx_hash: nil
+            tx_hash: nil,
+            tokens: []
 
-  # EGLD
+  @doc """
+  Return current account version.
+  """
+  def get_current(address, %Network{} = network, opts \\ []) do
+    with {:ok, acc} <- REST.get_address(network, address),
+         {:ok, tokens} <- get_tokens(address, network, acc) do
+      {:ok, %AccountState{nonce: acc["nonce"], balance: acc["balance"], tokens: tokens}}
+    else
+      {:error, error} -> {:error, error}
+    end
+  end
 
   @doc """
   Return current account tokens list.
   List contain EGLD as first token.
   """
-  def get_tokens(address, %Network{} = network) do
-    with {:ok, acc} <- REST.get_address(network, address),
+  def get_tokens(address, %Network{} = network, acc \\ nil) do
+    with {:ok, acc} <- load_account(acc, address, network),
          {:ok, esdt_map} <- REST.get_address_esdt(network, address),
          {:ok, esdt_tokens} <- parse_tokens(esdt_map, []) do
       native = %Token{identifier: "EGLD", name: "Native EGLD token", balance: acc["balance"]}
-      [native | esdt_tokens]
+      {:ok, [native | esdt_tokens]}
     else
       {:error, error} -> {:error, error}
     end
+  end
+
+  defp load_account(nil, address, network) do
+    REST.get_address(network, address)
+  end
+
+  defp load_account(acc, _network, _address) when is_map(acc) do
+    {:ok, acc}
   end
 
   defp parse_tokens([], acc_tokens) when is_list(acc_tokens) do
@@ -62,7 +81,7 @@ defmodule Xprover.AccountState do
   end
 
   def to_json(%AccountState{} = account_state) do
-    account_state |> Map.take([:nonce, :version, :balance, :tx_hash])
+    account_state |> Map.take([:nonce, :version, :balance, :tx_hash, :tokens])
   end
 end
 
