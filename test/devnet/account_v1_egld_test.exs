@@ -20,7 +20,6 @@ defmodule Devnet.AccountV1EgldTest do
       |> Transaction.wait(devnet, withResults: true)
 
     IO.inspect(tr0)
-    # TestData.put_data(:devnet, :transaction, "tr1.json", tr1)
 
     # prepare, sign and send transaction
     account_v1 = Account.generate_random()

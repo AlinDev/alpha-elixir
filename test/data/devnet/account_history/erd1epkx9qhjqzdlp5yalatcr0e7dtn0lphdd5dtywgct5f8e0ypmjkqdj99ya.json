@@ -1,0 +1,32 @@
+{
+  "address": "erd1epkx9qhjqzdlp5yalatcr0e7dtn0lphdd5dtywgct5f8e0ypmjkqdj99ya",
+  "network": "devnet",
+  "versions": [
+    {
+      "balance": "2000000000000000000",
+      "nonce": 0,
+      "tokens": [
+        {
+          "balance": "2000000000000000000",
+          "identifier": "EGLD",
+          "name": "Native EGLD token"
+        }
+      ],
+      "tx_hash": "837f91a23cb8eb5dc4515a9ba5906bb99ba15e54f44d6f33a966ccfcc9811e9f",
+      "version": 2
+    },
+    {
+      "balance": "1000000000000000000",
+      "nonce": 0,
+      "tokens": [
+        {
+          "balance": "1000000000000000000",
+          "identifier": "EGLD",
+          "name": "Native EGLD token"
+        }
+      ],
+      "tx_hash": "d3ab684a42734f1d828db0f8e09297207127fa9ae61fcf54dea70254050f4aeb",
+      "version": 1
+    }
+  ]
+}
