@@ -1,0 +1,19 @@
+{
+  "address": "erd1jjn3sf4m439850wdnse6svlw6cu5jnxjhlejxax3pfj2lc8vyw6qcwk7ur",
+  "network": "devnet",
+  "versions": [
+    {
+      "balance": "1000000000000000000",
+      "nonce": 0,
+      "tokens": [
+        {
+          "balance": "1000000000000000000",
+          "identifier": "EGLD",
+          "name": "Native EGLD token"
+        }
+      ],
+      "tx_hash": "69e8a073b4152c41191cf635f494000d15d5ff986156f257ffdc848024563d86",
+      "version": 1
+    }
+  ]
+}

@@ -14,7 +14,14 @@ defmodule Xprover.AccountState do
   def get_current(address, %Network{} = network, opts \\ []) do
     with {:ok, acc} <- REST.get_address(network, address),
          {:ok, tokens} <- get_tokens(address, network, acc) do
-      {:ok, %AccountState{nonce: acc["nonce"], balance: acc["balance"], tokens: tokens}}
+      {:ok,
+       %AccountState{
+         nonce: acc["nonce"],
+         version: Keyword.get(opts, :version),
+         balance: acc["balance"],
+         tx_hash: Keyword.get(opts, :tx_hash),
+         tokens: tokens
+       }}
     else
       {:error, error} -> {:error, error}
     end
