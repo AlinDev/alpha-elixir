@@ -1,0 +1,42 @@
+{
+  "address": "erd1fvuytcjt9tssfk6yw9sffx2h3zmjyhg2256ahkz7ukzvpandk2cqj52rtw",
+  "network": "devnet",
+  "versions": [
+    {
+      "balance": "0",
+      "nonce": 0,
+      "tokens": [
+        {
+          "balance": "0",
+          "identifier": "EGLD",
+          "name": "Native EGLD token"
+        },
+        {
+          "balance": "2000000",
+          "identifier": "XPROVER-37f217",
+          "name": "Name for XPROVER-37f217"
+        }
+      ],
+      "tx_hash": "aff91d9f4483872a53403f673f457292f76ea5b70d431e723925bfc39b56aa56",
+      "version": 2
+    },
+    {
+      "balance": "0",
+      "nonce": 0,
+      "tokens": [
+        {
+          "balance": "0",
+          "identifier": "EGLD",
+          "name": "Native EGLD token"
+        },
+        {
+          "balance": "1000000",
+          "identifier": "XPROVER-37f217",
+          "name": "Name for XPROVER-37f217"
+        }
+      ],
+      "tx_hash": "eb9459903d74be87af9fcff1c9bc6f9b1405a3eda5525329195f31593c074b01",
+      "version": 1
+    }
+  ]
+}
