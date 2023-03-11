@@ -53,7 +53,5 @@ defmodule Xprover.Balance do
       {:error, error} ->
         {:error, error}
     end
-
-    {:ok, calculate_transactions}
   end
 end

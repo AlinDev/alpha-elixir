@@ -19,11 +19,13 @@ defmodule Devnet.TransactionsTest do
 
     transactions
     |> Enum.map(fn tr ->
-      REST.get_transaction(devnet, tr["hash"], withResults: true)
+      {:ok, tr_wr} = REST.get_transaction(devnet, tr["hash"], withResults: true)
+      tr_wr
     end)
 
     IO.inspect(transactions)
 
+    IO.puts("------------------------")
     # parsed_transactions =
     #  transactions
     #  |> Enum.map(fn tr ->
