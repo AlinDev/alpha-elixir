@@ -1,0 +1,24 @@
+{
+  "address": "erd169swrwcmyr03xsgrdpg3jzq2zy8ylt7upyws09nwjdagsew3plhsd4vqlx",
+  "network": "devnet",
+  "versions": [
+    {
+      "balance": "0",
+      "nonce": 0,
+      "tokens": [
+        {
+          "balance": "0",
+          "identifier": "EGLD",
+          "name": "Native EGLD token"
+        },
+        {
+          "balance": "1000000",
+          "identifier": "XPROVER-37f217",
+          "name": "Name for XPROVER-37f217"
+        }
+      ],
+      "tx_hash": "475215276a1f67c9782d4a63799dce85ee3c3c7cfd7864c8c072a1f14bef11ba",
+      "version": 1
+    }
+  ]
+}
