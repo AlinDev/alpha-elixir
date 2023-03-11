@@ -8,6 +8,9 @@ defmodule Xprover.AccountState do
             tx_hash: nil,
             tokens: []
 
+  def get_from_transaction_history(address, %Network{} = network, opts \\ []) do
+  end
+
   @doc """
   Return current account version.
   """
