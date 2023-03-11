@@ -36,6 +36,10 @@ defmodule Xprover.Balance do
     end
   end
 
+  def calculate_tokens(address, transactions) do
+    calculate_tokens(address, transactions, [], %{"EGLD" => 0})
+  end
+
   def calculate_tokens(_address, [], calculate_transactions, _tokens_balance) do
     {:ok, Enum.reverse(calculate_transactions)}
   end

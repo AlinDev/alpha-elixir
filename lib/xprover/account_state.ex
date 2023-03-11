@@ -1,5 +1,5 @@
 defmodule Xprover.AccountState do
-  alias Xprover.{AccountState, Token}
+  alias Xprover.{AccountState, Token, Balance}
   alias Elrondex.{Network, REST}
 
   defstruct nonce: 0,
@@ -8,7 +8,22 @@ defmodule Xprover.AccountState do
             tx_hash: nil,
             tokens: []
 
-  def get_from_transaction_history(address, %Network{} = network, opts \\ []) do
+  def get_from_transaction_history(address, %Network{} = network, _opts \\ []) do
+    with {:ok, transactions} <- REST.get_address_transactions(network, address),
+         {:ok, calculate_tokens} <- Balance.calculate_tokens(address, transactions) do
+      last_tokens =
+        case List.last(calculate_tokens) do
+          nil -> []
+          last -> last["tokens"]
+        end
+
+      {:ok,
+       %AccountState{
+         tokens: last_tokens
+       }}
+    else
+      {:error, error} -> {:error, error}
+    end
   end
 
   @doc """
@@ -58,14 +73,15 @@ defmodule Xprover.AccountState do
   end
 
   defp parse_tokens(esdt_map, acc_tokens) when is_map(esdt_map) do
-    IO.inspect(esdt_map)
+    # IO.inspect(esdt_map)
 
     esdt_only =
       esdt_map
-      |> Enum.filter(fn {k, v} -> length(String.split(k, "-")) == 2 end)
-      |> Enum.map(fn {k, v} -> v end)
+      |> Enum.filter(fn {k, _v} -> length(String.split(k, "-")) == 2 end)
+      |> Enum.map(fn {_k, v} -> v end)
+      |> Enum.sort(fn {k1, _v1}, {k2, _v2} -> k1 < k2 end)
 
-    IO.inspect(esdt_only)
+    # IO.inspect(esdt_only)
 
     parse_tokens(esdt_only, acc_tokens)
   end
