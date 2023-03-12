@@ -8,6 +8,11 @@ defmodule Xprover.AccountState do
             tx_hash: nil,
             tokens: []
 
+  def get_address_transactions(address, %Network{} = network) do
+    # TODO
+    REST.get_address_transactions(network, address)
+  end
+
   def get_from_transaction_history(address, %Network{} = network, _opts \\ []) do
     with {:ok, transactions} <- REST.get_address_transactions(network, address),
          {:ok, calculate_tokens} <- Balance.calculate_tokens(address, transactions) do

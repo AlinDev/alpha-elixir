@@ -1,5 +1,5 @@
 defmodule Xprover.Balance do
-  alias Xprover.{Balance, TrParse}
+  alias Xprover.{Balance, TrParse, AccountState, Token}
 
   def add_balance_item({identifier, value}, tokens_balance)
       when is_binary(identifier) and is_integer(value) and is_map(tokens_balance) do
@@ -34,6 +34,31 @@ defmodule Xprover.Balance do
     else
       {:error, error} -> {:error, error}
     end
+  end
+
+  def calculate_versions(address, transactions) do
+    case calculate_tokens(address, transactions) do
+      {:ok, cal_tokens} ->
+        {:ok, Enum.map(cal_tokens, &tr_to_version/1)}
+
+      {:error, error} ->
+        {:error, error}
+    end
+  end
+
+  def tr_to_version(tr) do
+    tokens =
+      Enum.map(tr["tokens"], fn {t, v} ->
+        %Token{identifier: t, balance: v}
+      end)
+
+    %AccountState{
+      nonce: tr["nonce"],
+      version: 0,
+      balance: tr["tokens"]["EGLD"],
+      tx_hash: tr["hash"],
+      tokens: tokens
+    }
   end
 
   def calculate_tokens(address, transactions) do

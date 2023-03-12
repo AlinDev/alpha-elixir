@@ -34,7 +34,10 @@ defmodule Devnet.TransactionsTest do
 
     # IO.inspect(parsed_transactions)
 
-    calculate_tokens = Balance.calculate_tokens(address, transactions)
-    IO.inspect(calculate_tokens)
+    # calculate_tokens = Balance.calculate_tokens(address, transactions)
+    # IO.inspect(calculate_tokens)
+
+    calculate_versions = Balance.calculate_versions(address, transactions)
+    IO.inspect(calculate_versions)
   end
 end
