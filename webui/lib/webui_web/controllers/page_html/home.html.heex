@@ -1,0 +1,76 @@
+<div class="px-4 py-10  sm:px-6 lg:px-8 xl:py-32 ">
+  <div class="mx-auto max-w-xl lg:mx-0">
+    <h1 class="mt-10 flex items-center text-sm font-semibold leading-6 text-brand">
+      xProver - MultiversX Account History
+      <small class="ml-3 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6">
+        v 0.0.1
+      </small>
+    </h1>
+    <p class="mt-4 text-[2rem] font-semibold leading-10 tracking-tighter text-zinc-900">
+      Tape MultiversX account address.
+    </p>
+
+    <p>
+      <form action="/">
+        <input type="text" id="address" name="address" size="100px" />
+        <input type="submit" />
+      </form>
+    </p>
+    Examples: <br />
+
+    <a
+      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      href="/?address=erd1jjn3sf4m439850wdnse6svlw6cu5jnxjhlejxax3pfj2lc8vyw6qcwk7ur"
+    >
+      Account V1
+    </a>
+    <br />
+    <a
+      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      href="/?address=erd1epkx9qhjqzdlp5yalatcr0e7dtn0lphdd5dtywgct5f8e0ypmjkqdj99ya"
+    >
+      Account V2
+    </a>
+    <br />
+    <a
+      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      href="/?address=erd12y3rjn6qw2zzrjlkz8uzxgspsc67y0uxajh3qu9xlzyqj06hhvpssath9m"
+    >
+      Account V10
+    </a>
+    <br />
+
+    <a
+      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      href="/?address=erd1fvuytcjt9tssfk6yw9sffx2h3zmjyhg2256ahkz7ukzvpandk2cqj52rtw"
+    >
+      EGLD + ESDT
+    </a>
+    <br />
+    <a
+      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      href="/?address=erd169swrwcmyr03xsgrdpg3jzq2zy8ylt7upyws09nwjdagsew3plhsd4vqlx"
+    >
+      EGLD + ESDT
+    </a>
+    <br /> Hello <%= @current.ok %>
+
+    <table class="table-auto">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Balance</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <%= for token <- @current.data.tokens do %>
+        <tbody>
+          <tr>
+            <td><%= token.identifier %></td>
+            <td><%= token.balance %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
