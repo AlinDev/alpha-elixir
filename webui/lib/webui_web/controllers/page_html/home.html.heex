@@ -42,6 +42,35 @@
       OK? <%= @current.ok %> <br /><br /> Message: <%= @current.message %>
     <% end %>
 
+    <%= if @history.ok do %>
+      <br />
+      <br />
+      <h3>History account: <b><%= @history.data.address %></b></h3>
+
+      <%= for version <- @history.data.versions do %>
+        <br />
+        <hr /> Version: <%= version.version %> Tx: <%= version.tx_hash %>
+        <table class="table-auto">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <%= for token <- version.tokens do %>
+            <tbody>
+              <tr>
+                <td><%= token.identifier %></td>
+                <td><%= token.balance %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      <% end %>
+    <% else %>
+      OK? <%= @history.ok %> <br /><br /> Message: <%= @history.message %>
+    <% end %>
+
     <br />
     <br />
     <br />

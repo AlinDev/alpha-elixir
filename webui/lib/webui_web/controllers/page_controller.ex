@@ -19,6 +19,21 @@ defmodule WebuiWeb.PageController do
         {:error, error} -> %{:ok => false, message: inspect(error)}
       end
 
-    render(conn, :home, layout: false, current: current)
+    history =
+      with {:ok, current_acc} <- AccountState.get_current(address, devnet),
+           {:ok, transactions} <- AccountState.get_address_transactions(address, devnet),
+           {:ok, versions} <- Balance.calculate_versions(address, transactions) do
+        data = %{
+          address: address,
+          network: :devnet,
+          versions: versions
+        }
+
+        %{:ok => true, :data => data}
+      else
+        {:error, error} -> %{:ok => false, message: inspect(error)}
+      end
+
+    render(conn, :home, layout: false, current: current, history: history)
   end
 end
