@@ -7,7 +7,7 @@
       </small>
     </h1>
     <p class="mt-4 text-[2rem] font-semibold leading-10 tracking-tighter text-zinc-900">
-      Tape MultiversX account address.
+      MultiversX account address
     </p>
 
     <p>
@@ -16,7 +16,36 @@
         <input type="submit" />
       </form>
     </p>
-    Examples: <br />
+  </div>
+
+  <div class="mx-auto">
+    <%= if @current.ok do %>
+      <h3>Current account: <b><%= @current.address %></b></h3>
+
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <%= for token <- @current.data.tokens do %>
+          <tbody>
+            <tr>
+              <td><%= token.identifier %></td>
+              <td><%= token.balance %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    <% else %>
+      OK? <%= @current.ok %> <br /><br /> Message: <%= @current.message %>
+    <% end %>
+
+    <br />
+    <br />
+    <br />
+    <h3>Examples:</h3>
 
     <a
       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -53,24 +82,6 @@
     >
       EGLD + ESDT
     </a>
-    <br /> Hello <%= @current.ok %>
-
-    <table class="table-auto">
-      <thead>
-        <tr>
-          <th>Token</th>
-          <th>Balance</th>
-          <th>Year</th>
-        </tr>
-      </thead>
-      <%= for token <- @current.data.tokens do %>
-        <tbody>
-          <tr>
-            <td><%= token.identifier %></td>
-            <td><%= token.balance %></td>
-          </tr>
-        </tbody>
-      <% end %>
-    </table>
+    <br />
   </div>
 </div>

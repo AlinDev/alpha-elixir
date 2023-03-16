@@ -11,10 +11,11 @@ defmodule WebuiWeb.PageController do
     IO.puts("=== WebuiWeb.PageController ===")
 
     devnet = Network.get(:devnet)
+    address = params["address"]
 
     current =
-      case AccountState.get_current(params["address"], devnet) do
-        {:ok, valid} -> %{:ok => true, :data => valid}
+      case AccountState.get_current(address, devnet) do
+        {:ok, valid} -> %{:ok => true, :data => valid, :address => address}
         {:error, error} -> %{:ok => false, message: inspect(error)}
       end
 
